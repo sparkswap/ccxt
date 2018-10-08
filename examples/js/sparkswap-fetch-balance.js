@@ -5,8 +5,8 @@ const log = require('ololog').configure ({ locate: false })
 
 require ('ansicolor').nice
 
-const SPARKSWAP_UID = process.env_SPARKSWAP_UID || 'sparkswap'
-const SPARKSWAP_PASSWORD = process.env.SPARKSWAP_PASSWORD || 'sparkswap'
+const SPARKSWAP_UID = process.env.SPARKSWAP_UID || 'martine'
+const SPARKSWAP_PASSWORD = process.env.SPARKSWAP_PASSWORD || 'martine2'
 const SPARKSWAP_HOST = process.env.SPARKSWAP_HOST || 'http://localhost:27592'
 
 ;(async () => {

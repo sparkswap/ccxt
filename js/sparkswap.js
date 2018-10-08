@@ -131,7 +131,7 @@ module.exports = class sparkswap extends Exchange {
     }
 
     async createDepositAddress (code, params = {}) {
-        let res = await this.privatePostV1WalletAddress ({ symbol: code });
+        let res = await this.privatePostV1WalletAddress ({ 'symbol': code });
         return res.address;
     }
 

@@ -117,7 +117,7 @@ module.exports = class sparkswap extends Exchange {
         } else {
             body = this.json (query);
         }
-        headers = { 'Content-Type': 'application/json' }
+        headers = { 'Content-Type': 'application/json' };
         if (api === 'private') {
             this.checkRequiredCredentials ();
             let auth = this.uid + ':' + this.password;

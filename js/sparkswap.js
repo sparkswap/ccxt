@@ -390,7 +390,8 @@ module.exports = class sparkswap extends Exchange {
                 'MARKET': 'market',
             },
         };
-        const res = await this.privateGetV1Orders ({ 'market': symbol });
+        await this.loadMarkets ();
+        const res = await this.privateGetV1Orders ({ 'market': this.marketId (symbol) });
         const rawOrders = res.block_orders;
         let orders = [];
         for (let i = 0; i < rawOrders.length; i++) {

@@ -2,6 +2,7 @@
 
 // ----------------------------------------------------------------------------
 
+const https = require ('https');
 const Exchange = require ('./base/Exchange');
 const { ExchangeError, BadRequest } = require ('./base/errors');
 
@@ -104,6 +105,7 @@ module.exports = class sparkswap extends Exchange {
                 'BTC': '0.16777215',
                 'LTC': '10.06632900',
             },
+            'agent': new https.Agent ({ 'rejectUnauthorized': false }),
         });
     }
 
@@ -120,8 +122,6 @@ module.exports = class sparkswap extends Exchange {
             headers = {
                 'Content-Type': 'application/json',
             };
-            // Once authentication is enabled for CCXT w/ the grpc proxy, we can
-            // add the basic auth header to these params.
         }
         return { 'url': url, 'method': method, 'body': body, 'headers': headers };
     }

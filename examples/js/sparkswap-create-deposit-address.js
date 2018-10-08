@@ -26,10 +26,12 @@ const SPARKSWAP_HOST = process.env.SPARKSWAP_HOST || 'http://localhost:27592'
   });
 
   try {
-    const orderId = 'my-order-id'
-    var order = await exchange.fetchOrder(orderId)
-    log(order)
+    const code = 'BTC'
+
+    log('Creating new deposit address', { code })
+    var address = await exchange.createDepositAddress(code)
+    log('Created new deposit address', { address })
   } catch(e) {
-    log.bright.yellow('Failed to fetchBalance: ' + e.message)
+    log.bright.yellow('Failed to createDepositAddress: ' + e.message)
   }
 })()

@@ -25,11 +25,17 @@ const SPARKSWAP_HOST = process.env.SPARKSWAP_HOST || 'http://localhost:27592'
       }
   });
 
+  const symbol = 'BTC/LTC'
+  const type = 'market'
+  const side = 'buy'
+  const amount = 0.1
+
   try {
-    const orderId = 'my-order-id'
-    var order = await exchange.fetchOrder(orderId)
-    log(order)
+    log('Attempting to create order')
+    const res = await exchange.createOrder(symbol, type, side, amount)
+    log('Successfully created order', { id: res['id'] })
+
   } catch(e) {
-    log.bright.yellow('Failed to fetchBalance: ' + e.message)
+    log.bright.yellow('Failed to createOrder: ' + e.message)
   }
 })()

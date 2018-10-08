@@ -26,10 +26,15 @@ const SPARKSWAP_HOST = process.env.SPARKSWAP_HOST || 'http://localhost:27592'
   });
 
   try {
-    const orderId = 'my-order-id'
-    var order = await exchange.fetchOrder(orderId)
-    log(order)
+    const code = 'BTC'
+    const amount = 2.0
+    const address = 'deposit-wallet-address'
+
+    log(`Attempting to withdraw ${amount} ${code} from wallet to ${address}`)
+    var response = await exchange.withdraw(code, amount, address)
+    log(`Successfully withdrew ${amount} ${code} from wallet to ${address}, id: ${response['id']}`)
+
   } catch(e) {
-    log.bright.yellow('Failed to fetchBalance: ' + e.message)
+    log.bright.yellow('Failed to withdraw: ' + e.message)
   }
 })()

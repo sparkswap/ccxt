@@ -26,10 +26,12 @@ const SPARKSWAP_HOST = process.env.SPARKSWAP_HOST || 'http://localhost:27592'
   });
 
   try {
-    const orderId = 'my-order-id'
-    var order = await exchange.fetchOrder(orderId)
-    log(order)
+    const symbol = 'BTC/LTC'
+    log('Fetching orderbook', {symbol})
+    const response = await exchange.fetchOrderBook(symbol)
+    log('Fetched orderbook', {symbol, datetime: response['datetime']})
+    log(response)
   } catch(e) {
-    log.bright.yellow('Failed to fetchBalance: ' + e.message)
+    log.bright.yellow('Failed to fetchOrderBook: ' + e.message)
   }
 })()

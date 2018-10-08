@@ -115,13 +115,14 @@ module.exports = class sparkswap extends Exchange {
                 url += '?' + this.urlencode (query);
             }
         } else {
-            this.checkRequiredCredentials ();
             body = this.json (query);
-            headers = {
-                'Content-Type': 'application/json',
-            };
-            // Once authentication is enabled for CCXT w/ the grpc proxy, we can
-            // add the basic auth header to these params.
+        }
+        headers = { 'Content-Type': 'application/json' };
+        if (api === 'private') {
+            this.checkRequiredCredentials ();
+            let auth = this.uid + ':' + this.password;
+            let signature = this.stringToBase64 (auth);
+            headers['Authorization'] = 'Basic ' + signature;
         }
         return { 'url': url, 'method': method, 'body': body, 'headers': headers };
     }
@@ -130,8 +131,8 @@ module.exports = class sparkswap extends Exchange {
         return this.privateDeleteV1OrdersId ({ id });
     }
 
-    async createDepositAddress (symbol, params = {}) {
-        let res = await this.privatePostV1WalletAddress ({ symbol });
+    async createDepositAddress (code, params = {}) {
+        let res = await this.privatePostV1WalletAddress ({ 'symbol': code });
         return res.address;
     }
 
